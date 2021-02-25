@@ -87,8 +87,8 @@ public class Usuario implements Serializable {
     @Column(name = "ATIVO")
     private Boolean ativo;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private UsuarioGrupo usuarioGrupo;
+    @OneToOne(cascade = CascadeType.ALL)
+    private UsuarioGrupo grupo;
 
     @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID_PESSOA")
     @OneToOne(optional = false)
@@ -245,18 +245,15 @@ public class Usuario implements Serializable {
         this.idPessoa = idPessoa;
     }
 
-    public UsuarioGrupo getUsuarioGrupo() {
-        if (usuarioGrupo == null) {
-            usuarioGrupo = new UsuarioGrupo();
-        }
-        return usuarioGrupo;
-    }
+    public UsuarioGrupo getGrupo() {
+		return grupo;
+	}
 
-    public void setUsuarioGrupo(UsuarioGrupo usuarioGrupo) {
-        this.usuarioGrupo = usuarioGrupo;
-    }
+	public void setGrupo(UsuarioGrupo grupo) {
+		this.grupo = grupo;
+	}
 
-    @Override
+	@Override
     public int hashCode() {
         int hash = 3;
         hash = 79 * hash + Objects.hashCode(this.idUsuario);

@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UsuarioGrupo.findAll", query = "SELECT u FROM UsuarioGrupo u"),
-    @NamedQuery(name = "UsuarioGrupo.findByUsuarioUsername", query = "SELECT u FROM UsuarioGrupo u WHERE u.usuarioUsername = :usuarioUsername"),
+    @NamedQuery(name = "UsuarioGrupo.findByusername", query = "SELECT u FROM UsuarioGrupo u WHERE u.username = :username"),
     @NamedQuery(name = "UsuarioGrupo.findByGrupoNomeGrupo", query = "SELECT u FROM UsuarioGrupo u WHERE u.grupoNomeGrupo = :grupoNomeGrupo")})
 public class UsuarioGrupo implements Serializable {
 
@@ -37,8 +37,8 @@ public class UsuarioGrupo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "USUARIO_USERNAME")
-    private String usuarioUsername;
+    @Column(name = "USERNAME")
+    private String username;
 
     @Basic(optional = false)
     @NotNull
@@ -46,28 +46,28 @@ public class UsuarioGrupo implements Serializable {
     @Column(name = "GRUPO_NOME_GRUPO")
     private String grupoNomeGrupo;
 
-    @JoinColumn(name = "USUARIO_USERNAME", referencedColumnName = "USERNAME", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME")
+    @OneToOne(optional = false, mappedBy = "grupo")
     private Usuario usuario;
 
     public UsuarioGrupo() {
     }
 
-    public UsuarioGrupo(String usuarioUsername) {
-        this.usuarioUsername = usuarioUsername;
+    public UsuarioGrupo(String username) {
+        this.username = username;
     }
 
-    public UsuarioGrupo(String usuarioUsername, String grupoNomeGrupo) {
-        this.usuarioUsername = usuarioUsername;
+    public UsuarioGrupo(String username, String grupoNomeGrupo) {
+        this.username = username;
         this.grupoNomeGrupo = grupoNomeGrupo;
     }
 
-    public String getUsuarioUsername() {
-        return usuarioUsername;
+    public String getusername() {
+        return username;
     }
 
-    public void setUsuarioUsername(String usuarioUsername) {
-        this.usuarioUsername = usuarioUsername;
+    public void setusername(String username) {
+        this.username = username;
     }
 
     public String getGrupoNomeGrupo() {
@@ -89,7 +89,7 @@ public class UsuarioGrupo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (usuarioUsername != null ? usuarioUsername.hashCode() : 0);
+        hash += (username != null ? username.hashCode() : 0);
         return hash;
     }
 
@@ -100,7 +100,7 @@ public class UsuarioGrupo implements Serializable {
             return false;
         }
         UsuarioGrupo other = (UsuarioGrupo) object;
-        if ((this.usuarioUsername == null && other.usuarioUsername != null) || (this.usuarioUsername != null && !this.usuarioUsername.equals(other.usuarioUsername))) {
+        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
             return false;
         }
         return true;
@@ -108,7 +108,7 @@ public class UsuarioGrupo implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.GlobalVendasOn.Entidades.Pessoa.UsuarioGrupo_1[ usuarioUsername=" + usuarioUsername + " ]";
+        return "br.com.GlobalVendasOn.Entidades.Pessoa.UsuarioGrupo_1[ username=" + username + " ]";
     }
 
 }
